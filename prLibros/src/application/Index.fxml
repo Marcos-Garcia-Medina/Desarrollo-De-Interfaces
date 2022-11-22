@@ -103,12 +103,12 @@
                         </Label>
                      </top>
                      <center>
-                        <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tableVideojuegos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                           <columns>
-                            <TableColumn prefWidth="75.0" text="Nombre" />
-                            <TableColumn prefWidth="75.0" text="Precio" />
-                              <TableColumn prefWidth="75.0" text="Consola" />
-                              <TableColumn prefWidth="75.0" text="PEGI" />
+                            <TableColumn fx:id="columnNombre" prefWidth="75.0" text="Nombre" />
+                            <TableColumn fx:id="columnPrecio" prefWidth="75.0" text="Precio" />
+                              <TableColumn fx:id="columnConsola" prefWidth="75.0" text="Consola" />
+                              <TableColumn fx:id="columnPegi" prefWidth="75.0" text="PEGI" />
                           </columns>
                         </TableView>
                      </center>

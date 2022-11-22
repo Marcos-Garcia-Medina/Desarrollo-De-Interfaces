@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class IndexController {
 
@@ -21,23 +22,32 @@ public class IndexController {
 	@FXML
 	private TableView <Juego> tableVideojuegos;
 	@FXML
-	private TableColumn <Juego,String> nombre;
+	private TableColumn <Juego,String> columnNombre;
 	@FXML
-	private TableColumn <Juego,Integer> precio;
+	private TableColumn <Juego,Integer> columnPrecio;
 	@FXML
-	private TableColumn <Juego,String> consola;
+	private TableColumn <Juego,String> columnConsola;
 	@FXML
-	private TableColumn <Juego,String> pegi;
+	private TableColumn <Juego,String> columnPegi;
 	
 	public ObservableList<String> listaConsolas =
 			FXCollections.observableArrayList("PS4","XBOX 360","Nintendo Switch");
 	
-	public ObservableList<String> listaPegis =
-			FXCollections.observableArrayList("4","18","99");
+	public ObservableList<Integer> listaPegis =
+			FXCollections.observableArrayList(4,18,99);
 	
 	@FXML
 	private void initialize() {
+			
 		choiceConsola.setItems(listaConsolas);
-		column
+		choicePEGI.setItems(listaPegis);
+		
+			
+		columnNombre.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+		columnPrecio.setCellValueFactory(new PropertyValueFactory<>("editorial"));
+		columnConsola.setCellValueFactory(new PropertyValueFactory<>("autor"));
+		columnPegi.setCellValueFactory(new PropertyValueFactory<>("paginas"));
+			
+		tableVideojuegos.setItems(/**/); 
 	}
 }
