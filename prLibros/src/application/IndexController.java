@@ -30,6 +30,9 @@ public class IndexController {
 	@FXML
 	private TableColumn <Juego,String> columnPegi;
 	
+	public ObservableList<Juego> listaVideojuegos =
+			FXCollections.observableArrayList(new Juego("Pepito Grillo",1,4,"PS4"));
+	
 	public ObservableList<String> listaConsolas =
 			FXCollections.observableArrayList("PS4","XBOX 360","Nintendo Switch");
 	
@@ -43,11 +46,11 @@ public class IndexController {
 		choicePEGI.setItems(listaPegis);
 		
 			
-		columnNombre.setCellValueFactory(new PropertyValueFactory<>("titulo"));
-		columnPrecio.setCellValueFactory(new PropertyValueFactory<>("editorial"));
-		columnConsola.setCellValueFactory(new PropertyValueFactory<>("autor"));
-		columnPegi.setCellValueFactory(new PropertyValueFactory<>("paginas"));
+		columnNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+		columnPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
+		columnPegi.setCellValueFactory(new PropertyValueFactory<>("pegi"));
+		columnConsola.setCellValueFactory(new PropertyValueFactory<>("consola"));
 			
-		tableVideojuegos.setItems(/**/); 
+		tableVideojuegos.setItems(listaVideojuegos); 
 	}
 }
