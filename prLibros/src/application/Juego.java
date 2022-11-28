@@ -18,6 +18,10 @@ public class Juego {
 		this.consola = new SimpleStringProperty(nombre);
 	}
 	
+	public Juego() {
+
+	}
+
 	public String getNombre() {
 		return nombre.get();
 	}
