@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.IndexController">
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+   <left>
+      <SplitPane prefHeight="374.0" prefWidth="307.0" BorderPane.alignment="CENTER">
+         <items>
+            <AnchorPane prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <BorderPane layoutX="-2.0" prefHeight="374.0" prefWidth="309.0">
+                     <top>
+                        <Label fx:id="lblTitle" text="Backrooms BD" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <padding>
+                              <Insets bottom="30.0" top="30.0" />
+                           </padding>
+                        </Label>
+                     </top>
+                     <bottom>
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addBackroom" text="Add">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteBackroom" text="Delete" />
+                           </children>
+                        </HBox>
+                     </bottom>
+                     <center>
+                        <GridPane BorderPane.alignment="CENTER">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                              <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <TextField fx:id="txtLevelNumber" GridPane.columnIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <Label fx:id="lblLvlNum" alignment="CENTER" text="Level Number:">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="lblBackroomName" text="Backroom Name:" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="lblEntitysNum" text="Entitys Number:" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label fx:id="lblDifficulty" text="Difficulty:" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets left="20.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <TextField fx:id="txtBackroomName" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets right="20.0" />
+                                 </GridPane.margin>
+                              </TextField>
+                              <ChoiceBox fx:id="chEntitysNumber" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                 <GridPane.margin>
+                                    <Insets right="20.0" />
+                                 </GridPane.margin>
+                              </ChoiceBox>
+                              <ChoiceBox fx:id="chDifficulty" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                 <GridPane.margin>
+                                    <Insets right="20.0" />
+                                 </GridPane.margin>
+                              </ChoiceBox>
+                           </children>
+                        </GridPane>
+                     </center>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+         </items>
+      </SplitPane>
+   </left>
+   <right>
+      <AnchorPane prefHeight="374.0" prefWidth="294.0" BorderPane.alignment="CENTER">
+         <children>
+            <BorderPane layoutX="1.0" layoutY="-1.0" prefHeight="375.0" prefWidth="290.0">
+               <top>
+                  <Label fx:id="lblTitle1" text="Backrooms View" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="30.0" top="30.0" />
+                     </padding>
+                  </Label>
+               </top>
+               <center>
+                  <TableView fx:id="tableBackrooms" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                    <columns>
+                      <TableColumn fx:id="columnNumber" prefWidth="63.20001220703125" text="Number" />
+                      <TableColumn fx:id="columnName" prefWidth="68.0" text="Name" />
+                        <TableColumn fx:id="columnEntitys" prefWidth="76.79998779296875" text="Entitys" />
+                        <TableColumn fx:id="columnDifficulty" prefWidth="97.5999755859375" text="Difficulty" />
+                    </columns>
+                  </TableView>
+               </center>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </right>
+</BorderPane>
