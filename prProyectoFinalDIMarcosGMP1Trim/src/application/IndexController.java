@@ -173,6 +173,7 @@ public class IndexController {
             ps.setString(4, newBackroom.getDifficulty());
             
             ps.executeUpdate();
+			connection.close();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
