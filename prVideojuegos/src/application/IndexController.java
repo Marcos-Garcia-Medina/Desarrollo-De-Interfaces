@@ -1,16 +1,21 @@
 package application;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 public class IndexController {
@@ -59,7 +64,39 @@ public class IndexController {
 		columnPegi.setCellValueFactory(new PropertyValueFactory<>("pegi"));
 		columnConsola.setCellValueFactory(new PropertyValueFactory<>("consola"));
 			
-		tableVideojuegos.setItems(listaVideojuegos); 
+		ObservableList listaJuegosBD = getJuegosBD();
+		
+		tableVideojuegos.setItems(listaJuegosBD); 
+	}
+	
+	private ObservableList<Juego> getJuegosBD(){
+		
+		ObservableList<Juego> listaJuegosBD = FXCollections.observableArrayList();
+		
+		DatabaseConnection dbConnection = new DatabaseConnection();
+		Connection connection = dbConnection.getConnection();
+		
+		String query = "select * from videojuegos";
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()){
+				Juego juego = new Juego(rs.getString("nombre"),
+						rs.getInt("precio"),
+						rs.getInt("pegi"),
+						rs.getString("consola"));
+				listaJuegosBD.add(juego);
+			}
+			connection.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		return listaJuegosBD;
 	}
 	
 	@FXML
@@ -76,8 +113,8 @@ public class IndexController {
 			}else {
 				Alert alerta = new Alert(AlertType.ERROR);
 				alerta.setTitle("Error al insertar");
-				alerta.setHeaderText("No se ha introducido un numero en las paginas.");
-				alerta.setContentText("Por favor, introduzca un numero en las paginas.");
+				alerta.setHeaderText("No se ha introducido un precio.");
+				alerta.setContentText("Por favor, introduzca un precio.");
 				alerta.showAndWait();
 			}
 		}else {
@@ -98,7 +135,16 @@ public class IndexController {
 	public void borrarJuego(ActionEvent event) {
 		int indiceSeleccionado = tableVideojuegos.getSelectionModel().getSelectedIndex();
 		
-		tableVideojuegos.getItems().remove(indiceSeleccionado);
+		if(indiceSeleccionado <= -1) {
+			Alert alerta = new Alert(AlertType.ERROR);
+			alerta.setTitle("Error al borrar");
+			alerta.setHeaderText("No se ha seleccionado algo que borrar.");
+			alerta.setContentText("Asegurese de que hay algo que borrar.");
+			alerta.showAndWait();
+		}else {
+			tableVideojuegos.getItems().remove(indiceSeleccionado);
+			tableVideojuegos.getSelectionModel().clearSelection();
+		}
 	}
 	
 	public boolean isNumeric (String s) {

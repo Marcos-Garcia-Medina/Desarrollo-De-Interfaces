@@ -1,0 +1,10 @@
+.button {
+	-fx-background-color: blue;
+	-fx-font-size: 12pt;
+	-fx-text-fill: lightblue;
+	
+}
+
+#panel_izq {
+	-fx-background-color: lightblue;
+}
