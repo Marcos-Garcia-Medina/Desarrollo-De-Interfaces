@@ -26,83 +26,30 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			// Parte 1 Ej 1
+		    /*StackPane sp = new StackPane(); sp = new StackPane(); sp.setPadding(new
+			Insets(15)); sp.getChildren().addAll(new Rectangle(500, 500,Color.AQUA),new
+			Rectangle(250, 250, Color.RED), new Rectangle(100, 100, Color.GREEN));
+			 
+			Scene s = new Scene(sp); primaryStage.setScene(s); primaryStage.show();*/
+			 
+			 
+			//Parte 1 Ej 2
 			/*
-			 * Button btn = new Button("Click Aqui:"); btn.setOnAction(new
-			 * EventHandler<ActionEvent>(){
-			 * 
-			 * @Override public void handle(ActionEvent eventz) {
-			 * System.out.println("Hola mundo."); } });
-			 * 
-			 * Label lbl = new Label("Hola mundo.");
-			 * 
-			 * //Para insertar cosas en el panel, lo creamos.
-			 */
-			/*
-			 * StackPane panel1 = new StackPane(); StackPane panel2 = new StackPane();
-			 * StackPane panel3 = new StackPane();
-			 * 
-			 * Scene scene = new Scene(panel1,500,500);
-			 */
-
-			// Creamos la escena, y decimos el panel que queremos y las caracteristicas de
-			// este.
-
-			/*
-			 * Button btn1 = new Button("Boton 1"); Button btn2 = new Button("Boton 2");
-			 * Button btn3 = new Button("Boton 3"); Button btn4 = new Button("Boton 4");
-			 * 
-			 * 
-			 * GridPane panel = new GridPane();
-			 * 
-			 * panel.setVgap(15); panel.setHgap(15); panel.add(btn1, 0, 0); panel.add(btn2,
-			 * 1, 0); panel.add(btn3, 0, 1); panel.add(btn4, 1, 1);
+			 BorderPane bp = new BorderPane(); bp.getChildren().addAll();
+			 
+			 Rectangle r1 = new Rectangle(300, 300,Color.DARKBLUE); Rectangle r2 = new
+			 Rectangle(400, 50,Color.DARKGREEN); Rectangle r3 = new Rectangle(400,
+			 50,Color.DARKGREEN); Rectangle r4 = new Rectangle(50, 300,Color.LIGHTGREY);
+			 Rectangle r5 = new Rectangle(50, 300,Color.LIGHTGREY);
+			 
+			 bp.setCenter(r1); bp.setTop(r2); bp.setBottom(r3); bp.setRight(r4);
+			 bp.setLeft(r5);
+			 
+			 Scene s = new Scene(bp); primaryStage.setScene(s); primaryStage.show();
 			 */
 
-			/*
-			 * VBox panelVertical = new VBox(15); panelVertical.setPadding(new Insets(15));
-			 * panelVertical.getChildren().addAll(btn1,btn2,btn3); BorderPane bp = new
-			 * BorderPane(); bp.setRight(panelVertical);
-			 */
-			/*
-			 * bp.setCenter(btn1); bp.setRight(btn2); bp.setTop(btn3);
-			 */
-
-			// HBox vBoxPanel = new HBox(15);
-			// vBoxPanel.setPadding(new Insets(15));
-			// vBoxPanel.getChildren().addAll(btn1,btn2,btn3);
-			// Scene scene = new Scene(panel,400,300);
-
-			/*
-			 * primaryStage.setScene(scene); primaryStage.setTitle("Introduccion a JavaFX");
-			 * primaryStage.getIcons().add(new Image("/application/angry.png"));
-			 * primaryStage.show();
-			 */
-
-			// Parte 1 Ej 2
-			/*
-			 * StackPane sp = new StackPane(); sp = new StackPane(); sp.setPadding(new
-			 * Insets(15)); sp.getChildren().addAll(new Rectangle(500, 500,Color.AQUA),new
-			 * Rectangle(250, 250, Color.RED), new Rectangle(100, 100, Color.GREEN));
-			 * 
-			 * Scene s = new Scene(sp); primaryStage.setScene(s); primaryStage.show();
-			 */
-
-			/*
-			 * BorderPane bp = new BorderPane(); bp.getChildren().addAll();
-			 * 
-			 * Rectangle r1 = new Rectangle(300, 300,Color.DARKBLUE); Rectangle r2 = new
-			 * Rectangle(400, 50,Color.DARKGREEN); Rectangle r3 = new Rectangle(400,
-			 * 50,Color.DARKGREEN); Rectangle r4 = new Rectangle(50, 300,Color.LIGHTGREY);
-			 * Rectangle r5 = new Rectangle(50, 300,Color.LIGHTGREY);
-			 * 
-			 * bp.setCenter(r1); bp.setTop(r2); bp.setBottom(r3); bp.setRight(r4);
-			 * bp.setLeft(r5);
-			 * 
-			 * Scene s = new Scene(bp); primaryStage.setScene(s); primaryStage.show();
-			 */
-
-			// Ej 3
-			//Ejercicio 3. Teclado numérico:
+			//Teclado numérico:
             /*Button boton1 = new Button("1");
             Button boton2 = new Button("2");
             Button boton3 = new Button("3");
@@ -116,15 +63,13 @@ public class Main extends Application {
             Button botonLlamar = new Button("Llamar");
             Button botonColgar = new Button("Colgar");
 
-            //Panel principal
             BorderPane panel = new BorderPane();
             Label label_numero = new Label();
             panel.setBottom(label_numero);
 
 
-            //Panel secundario
             GridPane grid = new GridPane();
-            panel.setCenter(grid); //Esto es para alinearlo
+            panel.setCenter(grid);
 
             boton7.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
@@ -162,27 +107,6 @@ public class Main extends Application {
             Scene s = new Scene(panel,300,300);
             primaryStage.setScene(s);
             primaryStage.show();*/
-			
-			VBox panel = new VBox((15));
-			panel.setPadding(new Insets(15));
-			Label lbl_nombre = new Label("Nombre");
-			TextField txt_nombre = new TextField();
-			Label lbl_contra = new Label("Contraseña:");
-			PasswordField txt_contra = new PasswordField();
-			Button btn_entrar = new Button("Entrar");
-			Label lbl_bienvenida = new Label("Bienvenido.");
-			panel.getChildren().addAll(lbl_nombre,txt_nombre,lbl_contra,txt_contra, btn_entrar, lbl_bienvenida);
-			
-			btn_entrar.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent event) {
-					lbl_bienvenida.setText("Bienvenid@ "+txt_nombre.getText());
-					
-				}
-			});
-			Scene s = new Scene(panel,300,300);
-	        primaryStage.setScene(s);
-	        primaryStage.show();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
