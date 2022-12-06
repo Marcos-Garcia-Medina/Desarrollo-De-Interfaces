@@ -1,1 +1,25 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#formpane, #tablepane {
+	-fx-background-color: black;
+}
+
+.tableHeader {
+    -fx-background-color: black;
+}
+
+#menubar {
+	-fx-background-color: black;
+	-fx-background-color: #362424;
+}
+
+.button {
+	-fx-background-color: black;
+	-fx-text-fill: #821d1d;
+}
+
+.button:hover {
+    -fx-background-color: #362424;
+}
+
+.menuElement {
+	-fx-text-fill: #821d1d;
+}

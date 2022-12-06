@@ -21,14 +21,14 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.IndexController">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar id="menubar" stylesheets="@application.css" BorderPane.alignment="CENTER">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Main">
             <items>
               <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Preferencies">
             <items>
               <MenuItem mnemonicParsing="false" text="Delete" />
             </items>
@@ -46,26 +46,32 @@
          <items>
             <AnchorPane prefHeight="200.0" prefWidth="200.0">
                <children>
-                  <BorderPane layoutX="-2.0" prefHeight="374.0" prefWidth="309.0">
+                  <BorderPane id="formpane" layoutX="-2.0" prefHeight="374.0" prefWidth="309.0" stylesheets="@application.css">
                      <top>
-                        <Label fx:id="lblTitle" text="Backrooms BD" BorderPane.alignment="CENTER">
+                        <Label fx:id="lblTitle" text="Backrooms BD" textFill="#821d1d" BorderPane.alignment="CENTER">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="Gill Sans MT Condensed" size="24.0" />
                            </font>
                            <padding>
-                              <Insets bottom="30.0" top="30.0" />
+                              <Insets bottom="20.0" top="20.0" />
                            </padding>
                         </Label>
                      </top>
                      <bottom>
                         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                            <children>
-                              <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addBackroom" text="Add">
+                              <Button fx:id="btnAdd" mnemonicParsing="false" onAction="#addBackroom" text="Add" textFill="#821d1d">
                                  <HBox.margin>
                                     <Insets right="20.0" />
                                  </HBox.margin>
+                                 <font>
+                                    <Font name="Gill Sans MT Condensed" size="24.0" />
+                                 </font>
                               </Button>
-                              <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteBackroom" text="Delete" />
+                              <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#deleteBackroom" text="Delete">
+                                 <font>
+                                    <Font name="Gill Sans MT Condensed" size="24.0" />
+                                 </font></Button>
                            </children>
                         </HBox>
                      </bottom>
@@ -87,22 +93,22 @@
                                     <Insets right="20.0" />
                                  </GridPane.margin>
                               </TextField>
-                              <Label fx:id="lblLvlNum" alignment="CENTER" text="Level Number:">
+                              <Label fx:id="lblLvlNum" alignment="CENTER" text="Level Number:" textFill="WHITE">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label fx:id="lblBackroomName" text="Backroom Name:" GridPane.rowIndex="1">
+                              <Label fx:id="lblBackroomName" text="Backroom Name:" textFill="WHITE" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label fx:id="lblEntitysNum" text="Entitys Number:" GridPane.rowIndex="2">
+                              <Label fx:id="lblEntitysNum" text="Entitys Number:" textFill="WHITE" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label fx:id="lblDifficulty" text="Difficulty:" GridPane.rowIndex="3">
+                              <Label fx:id="lblDifficulty" text="Difficulty:" textFill="WHITE" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets left="20.0" />
                                  </GridPane.margin>
@@ -134,11 +140,11 @@
    <right>
       <AnchorPane prefHeight="374.0" prefWidth="294.0" BorderPane.alignment="CENTER">
          <children>
-            <BorderPane layoutX="1.0" layoutY="-1.0" prefHeight="375.0" prefWidth="290.0">
+            <BorderPane id="tablepane" layoutX="1.0" layoutY="-1.0" prefHeight="375.0" prefWidth="290.0" stylesheets="@application.css">
                <top>
-                  <Label fx:id="lblTitle1" text="Backrooms View" BorderPane.alignment="CENTER">
+                  <Label fx:id="lblTitle1" text="Backrooms View" textFill="#821d1d" BorderPane.alignment="CENTER">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="Gill Sans MT Condensed" size="24.0" />
                      </font>
                      <padding>
                         <Insets bottom="30.0" top="30.0" />
@@ -146,12 +152,12 @@
                   </Label>
                </top>
                <center>
-                  <TableView fx:id="tableBackrooms" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <TableView id="table" fx:id="tableBackrooms" prefHeight="200.0" prefWidth="200.0" stylesheets="@application.css" BorderPane.alignment="CENTER">
                     <columns>
-                      <TableColumn fx:id="columnNumber" prefWidth="63.20001220703125" text="Number" />
-                      <TableColumn fx:id="columnName" prefWidth="68.0" text="Name" />
-                        <TableColumn fx:id="columnEntitys" prefWidth="76.79998779296875" text="Entitys" />
-                        <TableColumn fx:id="columnDifficulty" prefWidth="97.5999755859375" text="Difficulty" />
+                      <TableColumn fx:id="columnNumber" prefWidth="63.20001220703125" styleClass="tableHeader" text="Number" />
+                      <TableColumn fx:id="columnName" prefWidth="68.0" styleClass="tableHeader" text="Name" />
+                        <TableColumn fx:id="columnEntitys" prefWidth="76.79998779296875" styleClass="tableHeader" text="Entitys" />
+                        <TableColumn fx:id="columnDifficulty" prefWidth="97.5999755859375" styleClass="tableHeader" text="Difficulty" />
                     </columns>
                   </TableView>
                </center>
