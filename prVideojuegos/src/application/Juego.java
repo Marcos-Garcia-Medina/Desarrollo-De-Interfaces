@@ -4,11 +4,26 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Juego {
+	private int id;
 	private SimpleStringProperty nombre;
 	private SimpleIntegerProperty precio;
 	private SimpleIntegerProperty pegi;
 	private SimpleStringProperty consola;
 	
+	public int getId() {
+		return id;
+	}
+
+	public Juego(int id, String nombre, int precio, int pegi,
+			String consola) {
+		super();
+		this.id = id;
+		this.nombre = new SimpleStringProperty(nombre);
+		this.precio = new SimpleIntegerProperty(precio);
+		this.pegi = new SimpleIntegerProperty(pegi);
+		this.consola = new SimpleStringProperty(nombre);
+	}
+
 	public Juego(String nombre, int precio, int pegi,
 			String consola) {
 		super();
@@ -49,7 +64,6 @@ public class Juego {
 	public String getConsola() {
 		return consola.get();
 	}
-	
 	
 	public void setConsola(String consola) {
 		this.consola = new SimpleStringProperty(consola);

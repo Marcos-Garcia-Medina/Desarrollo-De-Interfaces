@@ -1,9 +1,12 @@
 USE bd_videojuegos;
 
 CREATE TABLE videojuegos(
-	nombre VARCHAR(40) PRIMARY KEY,
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	nombre VARCHAR(40),
     precio INT NOT NULL,
     consola VARCHAR(40) NOT NULL,
     pegi INT NOT NULL
 );
+
+SELECT * FROM videojuegos;
 

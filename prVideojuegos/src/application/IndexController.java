@@ -44,7 +44,7 @@ public class IndexController {
 	private Button btnBorrar;
 	
 	public ObservableList<Juego> listaVideojuegos =
-			FXCollections.observableArrayList(new Juego("Pepito Grillo",1,4,"PS4"));
+			FXCollections.observableArrayList();
 	
 	public ObservableList<String> listaConsolas =
 			FXCollections.observableArrayList("PS4","XBOX 360","Nintendo Switch");
@@ -63,9 +63,10 @@ public class IndexController {
 		columnPrecio.setCellValueFactory(new PropertyValueFactory<>("precio"));
 		columnPegi.setCellValueFactory(new PropertyValueFactory<>("pegi"));
 		columnConsola.setCellValueFactory(new PropertyValueFactory<>("consola"));
-			
-		ObservableList listaJuegosBD = getJuegosBD();
 		
+		tableVideojuegos.setItems(listaVideojuegos); 
+		
+		ObservableList listaJuegosBD = getJuegosBD();
 		tableVideojuegos.setItems(listaJuegosBD); 
 	}
 	
@@ -84,7 +85,8 @@ public class IndexController {
 			ResultSet rs = ps.executeQuery();
 			
 			while(rs.next()){
-				Juego juego = new Juego(rs.getString("nombre"),
+				Juego juego = new Juego(rs.getInt("id"),
+						rs.getString("nombre"),
 						rs.getInt("precio"),
 						rs.getInt("pegi"),
 						rs.getString("consola"));
@@ -109,7 +111,31 @@ public class IndexController {
 					,Integer.parseInt(choicePEGI.getValue().toString())
 					,choiceConsola.getValue().toString());
 				
-				listaVideojuegos.add(nuevoJuego);
+	            DatabaseConnection bdConnection = new DatabaseConnection();
+	            Connection connection = bdConnection.getConnection();
+	            
+	            String query = "insert into videojuegos (nombre, precio, consola, pegi) values (?,?,?,?)";
+
+                try {
+                    PreparedStatement ps = connection.prepareStatement(query);
+                    ps.setString(1, nuevoJuego.getNombre());
+                    ps.setInt(2, nuevoJuego.getPrecio());
+                    ps.setString(3, nuevoJuego.getConsola());
+                    ps.setInt(4, nuevoJuego.getPegi());
+					ps.executeUpdate();
+					
+					listaVideojuegos.add(nuevoJuego);
+					
+					ObservableList listaVideojuegosBD = getJuegosBD();
+
+		            tableVideojuegos.setItems(listaVideojuegosBD);
+					
+	                connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+
 			}else {
 				Alert alerta = new Alert(AlertType.ERROR);
 				alerta.setTitle("Error al insertar");
@@ -129,6 +155,8 @@ public class IndexController {
 		txtPrecio.clear();
 		choicePEGI.getSelectionModel().clearSelection();
 		choiceConsola.getSelectionModel().clearSelection();
+		
+		
 	}
 	
 	@FXML
@@ -142,8 +170,27 @@ public class IndexController {
 			alerta.setContentText("Asegurese de que hay algo que borrar.");
 			alerta.showAndWait();
 		}else {
-			tableVideojuegos.getItems().remove(indiceSeleccionado);
-			tableVideojuegos.getSelectionModel().clearSelection();
+			
+			DatabaseConnection bdConnection = new DatabaseConnection();
+			Connection connection = bdConnection.getConnection();
+			
+			try {
+				String query = "delete from videojuegos where id = ?";
+				PreparedStatement ps = connection.prepareStatement(query);
+				Juego juego = tableVideojuegos.getSelectionModel().getSelectedItem();
+				ps.setInt(1,juego.getId());
+				ps.executeUpdate();
+				
+				tableVideojuegos.getSelectionModel().clearSelection();
+				
+				ObservableList listaJuegosBD = getJuegosBD();
+				tableVideojuegos.setItems(listaJuegosBD);
+				
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
