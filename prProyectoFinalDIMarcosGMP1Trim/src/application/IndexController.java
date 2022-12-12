@@ -100,37 +100,39 @@ public class IndexController {
 	
 	@FXML
 	public void addBackroom(ActionEvent event) {
-		if(isNumeric(txtLevelNumber.getText())) {
-			if(txtLevelNumber.getText().isEmpty() || txtBackroomName.getText().isEmpty() || chEntitysNumber.getSelectionModel().isEmpty() || chDifficulty.getSelectionModel().isEmpty()) {
-				Alert alerta = new Alert(AlertType.WARNING);
-				alerta.setTitle("Error at insert.");
-				alerta.setHeaderText("Some fields could be empty.");
-				alerta.setContentText("Please, fill all the fields to insert.");
-				alerta.showAndWait();
-			}else {
+		
+		if(txtLevelNumber.getText().isEmpty() || txtBackroomName.getText().isEmpty() || chEntitysNumber.getSelectionModel().isEmpty() || chDifficulty.getSelectionModel().isEmpty()) {
+			Alert alerta = new Alert(AlertType.WARNING);
+			alerta.setTitle("Error at insert.");
+			alerta.setHeaderText("Some fields could be empty.");
+			alerta.setContentText("Please, fill all the fields to insert a backroom.");
+			alerta.showAndWait();
+		}else {
+			if(isNumeric(txtLevelNumber.getText())) {
+			
 				Backroom newBackroom = new Backroom(
-					Integer.parseInt(txtLevelNumber.getText())
-					,txtBackroomName.getText(),
-					Integer.parseInt(chEntitysNumber.getValue().toString())
-					,chDifficulty.getValue().toString());
+					Integer.parseInt(txtLevelNumber.getText()),
+					txtBackroomName.getText(),
+					Integer.parseInt(chEntitysNumber.getValue().toString()),
+					chDifficulty.getValue().toString());
 				
 				DatabaseConnection bdConnection = new DatabaseConnection();
 	            Connection connection = bdConnection.getConnection();
 	            
 	            String query = "insert into backrooms (levelNumber, backroomName, entitysNumber, difficulty) values (?,?,?,?)";
-
-                try {
-                    PreparedStatement ps = connection.prepareStatement(query);
-                    ps.setInt(1, newBackroom.getLevelNumber());
-                    ps.setString(2, newBackroom.getBackroomName());
-                    ps.setInt(3, newBackroom.getEntitysNumber());
-                    ps.setString(4, newBackroom.getDifficulty());
+	
+	            try {
+	                PreparedStatement ps = connection.prepareStatement(query);
+	                ps.setInt(1, newBackroom.getLevelNumber());
+	                ps.setString(2, newBackroom.getBackroomName());
+	                ps.setInt(3, newBackroom.getEntitysNumber());
+	                ps.setString(4, newBackroom.getDifficulty());
 					ps.executeUpdate();
 					
 					backroomsList.add(newBackroom);
 					
 					ObservableList backroomsBDList = getBackroomsBD();
-
+	
 		            tableBackrooms.setItems(backroomsBDList);
 					
 	                connection.close();
@@ -138,21 +140,21 @@ public class IndexController {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-                
+	            
 				backroomsList.add(newBackroom);
 			
 				txtLevelNumber.clear();
 				txtBackroomName.clear();
 				chEntitysNumber.getSelectionModel().clearSelection();
 				chDifficulty.getSelectionModel().clearSelection();
-
+				
+			} else {
+				Alert alerta = new Alert(AlertType.ERROR);
+				alerta.setTitle("Error at insert.");
+				alerta.setHeaderText("The backroom/level number is not a number.");
+				alerta.setContentText("Please, set the backroom number as a number.");
+				alerta.showAndWait();
 			}
-		}else {
-			Alert alerta = new Alert(AlertType.ERROR);
-			alerta.setTitle("Error at insert.");
-			alerta.setHeaderText("The backroom number is not a number.");
-			alerta.setContentText("Please, set the backroom number as a number.");
-			alerta.showAndWait();
 		}
 	}
 	
