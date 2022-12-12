@@ -43,7 +43,7 @@ public class IndexController {
 	private Button btnDelete;
 	
 	public ObservableList<Backroom> backroomsList =
-			FXCollections.observableArrayList(new Backroom(1,"Backroom 1",1,"Easy"));
+			FXCollections.observableArrayList();
 	
 	public ObservableList<Integer> entitysNumberList =
 			FXCollections.observableArrayList(1,10,999);
@@ -113,16 +113,38 @@ public class IndexController {
 					,txtBackroomName.getText(),
 					Integer.parseInt(chEntitysNumber.getValue().toString())
 					,chDifficulty.getValue().toString());
-							
+				
+				DatabaseConnection bdConnection = new DatabaseConnection();
+	            Connection connection = bdConnection.getConnection();
+	            
+	            String query = "insert into backrooms (levelNumber, backroomName, entitysNumber, difficulty) values (?,?,?,?)";
+
+                try {
+                    PreparedStatement ps = connection.prepareStatement(query);
+                    ps.setInt(1, newBackroom.getLevelNumber());
+                    ps.setString(2, newBackroom.getBackroomName());
+                    ps.setInt(3, newBackroom.getEntitysNumber());
+                    ps.setString(4, newBackroom.getDifficulty());
+					ps.executeUpdate();
+					
+					backroomsList.add(newBackroom);
+					
+					ObservableList backroomsBDList = getBackroomsBD();
+
+		            tableBackrooms.setItems(backroomsBDList);
+					
+	                connection.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+                
 				backroomsList.add(newBackroom);
 			
 				txtLevelNumber.clear();
 				txtBackroomName.clear();
 				chEntitysNumber.getSelectionModel().clearSelection();
 				chDifficulty.getSelectionModel().clearSelection();
-				
-				insertNewBackroom(newBackroom);
-				tableBackrooms.refresh();
 
 			}
 		}else {
@@ -145,8 +167,27 @@ public class IndexController {
 			alert.setContentText("Please, select something to delete.");
 			alert.showAndWait();
 		}else {
-			tableBackrooms.getItems().remove(selectIndex);
+			DatabaseConnection bdConnection = new DatabaseConnection();
+			Connection connection = bdConnection.getConnection();
+			
+			try {
+				String query = "delete from backrooms where levelNumber = ?";
+				PreparedStatement ps = connection.prepareStatement(query);
+				Backroom backroom = tableBackrooms.getSelectionModel().getSelectedItem();
+				ps.setInt(1,backroom.getLevelNumber());
+				ps.executeUpdate();
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			tableBackrooms.getSelectionModel().clearSelection();
+			
+			ObservableList backroomsBDList = getBackroomsBD();
+			tableBackrooms.setItems(backroomsBDList);
+			
+
 		}
 	}
 	
@@ -157,26 +198,5 @@ public class IndexController {
 		}catch(NumberFormatException e) {
 			return false;
 		}
-	}
-	
-	public void insertNewBackroom(Backroom newBackroom) {
-		DatabaseConnection dbConnection = new DatabaseConnection();
-		Connection connection = dbConnection.getConnection();
-
-        String query = "insert into backrooms(levelNumber, backroomName, entitysNumber, difficulty) values (?,?,?,?)";
-        
-        try {
-            PreparedStatement ps = connection.prepareStatement(query);
-            ps.setInt(1, newBackroom.getLevelNumber());
-            ps.setString(2, newBackroom.getBackroomName());
-            ps.setInt(3, newBackroom.getEntitysNumber());
-            ps.setString(4, newBackroom.getDifficulty());
-            
-            ps.executeUpdate();
-			connection.close();
-        } catch (SQLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
 	}
 }

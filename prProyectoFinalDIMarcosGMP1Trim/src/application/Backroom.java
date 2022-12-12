@@ -1,49 +1,53 @@
 package application;
 
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+
 public class Backroom {
 	
-	private int levelNumber;
-	private String backroomName;
-	private int entitysNumber;
-	private String difficulty;
+	private SimpleIntegerProperty levelNumber;
+	private SimpleStringProperty backroomName;
+	private SimpleIntegerProperty entitysNumber;
+	private SimpleStringProperty difficulty;
 	
-	public Backroom(int levelNumber, String backroomName, int entitysNumber, String difficulty) {
+	public Backroom(int levelNumber, String backroomName,
+			int entitysNumber, String difficulty) {
 		super();
-		this.levelNumber = levelNumber;
-		this.backroomName = backroomName;
-		this.entitysNumber = entitysNumber;
-		this.difficulty = difficulty;
+		this.levelNumber = new SimpleIntegerProperty(levelNumber);
+		this.backroomName = new SimpleStringProperty(backroomName);
+		this.entitysNumber = new SimpleIntegerProperty(entitysNumber);
+		this.difficulty = new SimpleStringProperty(difficulty);
 	}
 
 	public int getLevelNumber() {
-		return levelNumber;
+		return levelNumber.get();
 	}
 
-	public void setLevelNumber(int levelNumber) {
+	public void setLevelNumber(SimpleIntegerProperty levelNumber) {
 		this.levelNumber = levelNumber;
 	}
 
 	public String getBackroomName() {
-		return backroomName;
+		return backroomName.get();
 	}
 
-	public void setBackroomName(String backroomName) {
+	public void setBackroomName(SimpleStringProperty backroomName) {
 		this.backroomName = backroomName;
 	}
 
 	public int getEntitysNumber() {
-		return entitysNumber;
+		return entitysNumber.get();
 	}
 
-	public void setEntitysNumber(int entitysNumber) {
+	public void setEntitysNumber(SimpleIntegerProperty entitysNumber) {
 		this.entitysNumber = entitysNumber;
 	}
 
 	public String getDifficulty() {
-		return difficulty;
+		return difficulty.get();
 	}
 
-	public void setDifficulty(String difficulty) {
+	public void setDifficulty(SimpleStringProperty difficulty) {
 		this.difficulty = difficulty;
 	}
 
@@ -52,5 +56,4 @@ public class Backroom {
 		return "Backroom [levelNumber=" + levelNumber + ", backroomName=" + backroomName + ", entitysNumber="
 				+ entitysNumber + ", difficulty=" + difficulty + "]";
 	}
-	
 }
