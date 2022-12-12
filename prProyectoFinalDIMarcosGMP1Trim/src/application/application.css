@@ -2,13 +2,20 @@
 	-fx-background-color: black;
 }
 
-.tableHeader {
-    -fx-background-color: black;
+.table-view {
+    -fx-base: #362424;
+    -fx-control-inner-background: #362424;
+    -fx-background-color: #362424;
+    -fx-table-cell-border-color: black;
+    -fx-table-header-border-color: black;
 }
 
 #menubar {
-	-fx-background-color: black;
 	-fx-background-color: #362424;
+}
+
+.menu-bar .label {
+    -fx-text-fill: white;
 }
 
 .button {
@@ -20,6 +27,11 @@
     -fx-background-color: #362424;
 }
 
-.menuElement {
-	-fx-text-fill: #821d1d;
+.context-menu {
+    -fx-background-color: #362424;
 }
+
+.context-menu .label {
+    -fx-text-fill: white;
+}
+
