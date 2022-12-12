@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/18" fx:controller="application.IndexController">
+   <top>
+      <Pane prefHeight="393.0" prefWidth="387.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="52.0" layoutY="224.0" text="Name:" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" />
+            <Label layoutX="52.0" layoutY="250.0" text="Pass:" />
+            <TextField fx:id="name" layoutX="92.0" layoutY="220.0" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" />
+            <PasswordField fx:id="pass" layoutX="92.0" layoutY="246.0" />
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="94.0" layoutY="80.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../cenec.png" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblMsg" alignment="CENTER" layoutX="107.0" layoutY="321.0" prefHeight="39.0" prefWidth="173.0" />
+            <Button layoutX="272.0" layoutY="238.0" mnemonicParsing="false" onAction="#welcome" text="Enter" />
+         </children>
+      </Pane>
+   </top>
+</BorderPane>
