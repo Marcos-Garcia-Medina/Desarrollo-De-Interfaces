@@ -56,17 +56,14 @@ public class IndexController {
 	private Button btBorrar;
 
 	private ObservableList<Libro> listaLibros = FXCollections
-			.observableArrayList(new Libro("La Biblia", "Planeta", "Jes�s", 500));
+			.observableArrayList();
 
-	// ObservableList --> Refleja los cambios en tiempo real, ya que al modificar
-	// esa lista, se cambia todo automaticamente en tiempo real.
 	public ObservableList<String> listaEditoriales = FXCollections.observableArrayList("Planeta", "Altaya", "Kadokawa",
 			"Penguin Libros");
 
 	@FXML
 	private void initialize() {
-		chbEditorial.setItems(listaEditoriales); // Cuando arranque la aplicaci�n, al ChoiceBox le va a meter la lista
-													// de editoriales
+		chbEditorial.setItems(listaEditoriales);
 
 		columTitulo.setCellValueFactory(new PropertyValueFactory<>("titulo"));
 		columEditorial.setCellValueFactory(new PropertyValueFactory<>("editorial"));
@@ -75,18 +72,14 @@ public class IndexController {
 		
 		tableLibros.setItems(listaLibros); 
 		
-		//Almacenamos en esta variable la lista de libros de la BD
 		ObservableList listaLibrosBD = getLibrosBD();
-
-		tableLibros.setItems(listaLibrosBD);
+		tableLibros.setItems(listaLibrosBD);	
 	}
 	
 	private ObservableList<Libro> getLibrosBD(){
 		
-		//Creamos la ObservableList donde almacenaremos los libros obtenidos de la BD
 		ObservableList<Libro> listaLibrosBD = FXCollections.observableArrayList();
 		
-		//Nos conectamos a la BD
 		DatabaseConnection bdConnection = new DatabaseConnection();
 		Connection connection = bdConnection.getConnection();
 		
@@ -96,11 +89,10 @@ public class IndexController {
 			ResultSet rs = ps.executeQuery();
 			
 			while (rs.next()) {
-				Libro libro = new Libro(rs.getString("titulo"), rs.getString("editorial"), rs.getString("autor"), rs.getInt("paginas"));
+				Libro libro = new Libro(rs.getInt("id"),rs.getString("titulo"), rs.getString("editorial"), rs.getString("autor"), rs.getInt("paginas"));
 				listaLibrosBD.add(libro);
 			}
 			
-			//cerramos la conexion
 			connection.close();
 		} catch (SQLException e1) {
 			// TODO Auto-generated catch block
@@ -135,11 +127,32 @@ public class IndexController {
 			
 		}else {
 			Libro libro = new Libro(txtTitulo.getText(), chbEditorial.getValue().toString(),txtAutor.getText(),	Integer.parseInt(txtPaginas.getText()));
-			listaLibros.add(libro);
 			txtTitulo.clear();
 			chbEditorial.getSelectionModel().clearSelection();
 			txtAutor.clear();
 			txtPaginas.clear(); 
+			
+			DatabaseConnection dbConnection = new DatabaseConnection();
+			Connection connection = dbConnection.getConnection();
+			
+			try {
+				String query = "insert into libros (titulo, editorial, autor, paginas) values (?,?,?,?)";
+				
+				PreparedStatement ps = connection.prepareStatement(query);
+				ps.setString(1, libro.getTitulo());
+				ps.setString(2, libro.getEditorial());
+				ps.setString(3, libro.getAutor());
+				ps.setInt(4, libro.getPaginas());
+				ps.executeUpdate();
+				
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			ObservableList listaLibrosBD = getLibrosBD();
+			tableLibros.setItems(listaLibrosBD);	
 		}
 		
 	}
@@ -151,17 +164,33 @@ public class IndexController {
 		int indiceSeleccionado = tableLibros.getSelectionModel().getSelectedIndex();
 		System.out.println("Indice a borrar: " + indiceSeleccionado);
 		if(indiceSeleccionado <= -1) {
-			//Alerta error
 			Alert alerta = new Alert(AlertType.ERROR);
 			alerta.setTitle("Error al borrar");
 			alerta.setHeaderText("No se ha podido borrar el elemento");
 			alerta.setContentText("Por favor, seleccione el elemento que quiere borrar");
 			alerta.showAndWait(); 
-		}else {
-			tableLibros.getItems().remove(indiceSeleccionado);
-			tableLibros.getSelectionModel().clearSelection();
+		}else {		
+			DatabaseConnection bdConnection = new DatabaseConnection();
+			Connection connection = bdConnection.getConnection();
+			
+			try {
+				String query = "delete from libros where id = ?";
+				PreparedStatement ps = connection.prepareStatement(query);
+				Libro libro = tableLibros.getSelectionModel().getSelectedItem();
+				ps.setInt(1,libro.getId());
+				ps.executeUpdate();
+				
+				tableLibros.getSelectionModel().clearSelection();
+				
+				ObservableList listaLibrosBD = getLibrosBD();
+				tableLibros.setItems(listaLibrosBD);
+				
+				connection.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
 	}
 
 	private static boolean esNumero(String cadena) {
