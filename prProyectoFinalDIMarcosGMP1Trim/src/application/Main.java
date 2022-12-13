@@ -21,7 +21,7 @@ public class Main extends Application {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Index.fxml"));
 			Scene scene = new Scene(root,600,400);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			//primaryStage.getIcons().add(new Image("/application/br.png"));
+			primaryStage.getIcons().add(new Image("/application/br.png"));
 			primaryStage.setTitle("Backrooms BD MGM");
 			primaryStage.setScene(scene);
 			primaryStage.show();
