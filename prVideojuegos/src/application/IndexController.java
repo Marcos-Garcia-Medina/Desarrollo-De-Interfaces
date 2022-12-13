@@ -17,7 +17,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
+/**
+ * 
+ * @author Marcos Garcia Medina.
+ *
+ */
 public class IndexController {
 
 	@FXML
@@ -37,7 +41,7 @@ public class IndexController {
 	@FXML
 	private TableColumn <Juego,String> columnConsola;
 	@FXML
-	private TableColumn <Juego,String> columnPegi;
+	private TableColumn <Juego,Integer> columnPegi;
 	@FXML
 	private Button btnAnadir;
 	@FXML
@@ -53,6 +57,9 @@ public class IndexController {
 			FXCollections.observableArrayList(4,18,99);
 	
 	@FXML
+	/**
+	 * 
+	 */
 	private void initialize() {
 			
 		choiceConsola.setItems(listaConsolas);
@@ -107,9 +114,11 @@ public class IndexController {
 			if(isNumeric(txtPrecio.getText())) {
 				Juego nuevoJuego = new Juego(
 					txtNombre.getText(),
-					Integer.parseInt(txtPrecio.getText())
-					,Integer.parseInt(choicePEGI.getValue().toString())
-					,choiceConsola.getValue().toString());
+					Integer.parseInt(txtPrecio.getText()),
+					Integer.parseInt(choicePEGI.getValue().toString()),
+					choiceConsola.getValue().toString());
+				
+				System.out.println(nuevoJuego.getNombre());
 				
 	            DatabaseConnection bdConnection = new DatabaseConnection();
 	            Connection connection = bdConnection.getConnection();

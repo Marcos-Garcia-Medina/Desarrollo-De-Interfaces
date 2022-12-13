@@ -21,7 +21,7 @@ public class Juego {
 		this.nombre = new SimpleStringProperty(nombre);
 		this.precio = new SimpleIntegerProperty(precio);
 		this.pegi = new SimpleIntegerProperty(pegi);
-		this.consola = new SimpleStringProperty(nombre);
+		this.consola = new SimpleStringProperty(consola);
 	}
 
 	public Juego(String nombre, int precio, int pegi,
@@ -30,7 +30,7 @@ public class Juego {
 		this.nombre = new SimpleStringProperty(nombre);
 		this.precio = new SimpleIntegerProperty(precio);
 		this.pegi = new SimpleIntegerProperty(pegi);
-		this.consola = new SimpleStringProperty(nombre);
+		this.consola = new SimpleStringProperty(consola);
 	}
 	
 	public Juego() {
