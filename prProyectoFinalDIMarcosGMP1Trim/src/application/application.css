@@ -10,6 +10,11 @@
     -fx-table-header-border-color: black;
 }
 
+.table-view .column-header .label {
+    -fx-font-size: 10pt;
+    -fx-alignment: center;
+}
+
 #menubar {
 	-fx-background-color: #362424;
 }

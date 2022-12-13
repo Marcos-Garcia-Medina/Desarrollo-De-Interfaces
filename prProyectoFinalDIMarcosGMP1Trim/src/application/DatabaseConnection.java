@@ -7,7 +7,6 @@ import java.sql.SQLException;
 /**
  * Clase que nos ayudara a conectarnos con la base de datos.
  * @author Marcos Garcia Medina.
- *
  */
 public class DatabaseConnection {
 
