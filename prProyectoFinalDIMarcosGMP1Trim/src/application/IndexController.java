@@ -18,39 +18,87 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+/**
+ * Clase que nos permitira usar y modificar los elementos de la interfaz.
+ * @author Marcos Garcia Medina.
+ */
 public class IndexController {
+	/**
+	 * txtLevelNumber: TextField levelNumber.
+	 */
 	@FXML
 	private TextField txtLevelNumber;
+	/**
+	 * txtBackroomName: TextField txtBackroomName.
+	 */
 	@FXML
 	private TextField txtBackroomName;
+	/**
+	 * chEntitysNumber: ChoiceBox chEntitysNumber;
+	 */
 	@FXML
 	private ChoiceBox chEntitysNumber;
+	/**
+	 * chDifficulty: ChoiceBox chDifficulty.
+	 */
 	@FXML
 	private ChoiceBox chDifficulty;
+	/**
+	 * tableBackrooms: Tabla tableBackrooms.
+	 */
 	@FXML
 	private TableView <Backroom> tableBackrooms;
+	/**
+	 * columnNumber: Columna columnNumber.
+	 */
 	@FXML
 	private TableColumn <Backroom,Integer> columnNumber;
+	/**
+	 * columnName: Columna columnName.
+	 */
 	@FXML
 	private TableColumn <Backroom,String> columnName;
+	/**
+	 * columnEntitys: Columna columnEntitys.
+	 */
 	@FXML
 	private TableColumn <Backroom,Integer> columnEntitys;
+	/**
+	 * columnDifficulty: Columna columnDifficulty.
+	 */
 	@FXML
 	private TableColumn <Backroom,String> columnDifficulty;
+	/**
+	 * btnAdd: Boton btnAdd.
+	 */
 	@FXML
 	private Button btnAdd;
+	/**
+	 * btnDelete: Boton btnDelete.
+	 */
 	@FXML
 	private Button btnDelete;
-	
+	/**
+	 * backroomsList: ObservableList<Backroom> backroomsList.
+	 */
 	public ObservableList<Backroom> backroomsList =
 			FXCollections.observableArrayList();
-	
+	/**
+	 * entitysNumberList: ObservableList<Integer> entitysNumberList.
+	 */
 	public ObservableList<Integer> entitysNumberList =
 			FXCollections.observableArrayList(1,10,999);
-	
+	/**
+	 * difficultyList: ObservableList<String> difficultyList.
+	 */
 	public ObservableList<String> difficultyList =
 			FXCollections.observableArrayList("Easy","Medium","Hard","Extreme");
 	
+	/**
+	 * Funcion que se ejecuta al iniciar el programa.
+	 * Esta, asigna las opcion a los choiceboxs, asigna los valores de las columnas de la tabla,
+	 * y recupera las backrooms de la base de datos que ya estan, y las mete en la tabla.
+	 */
 	@FXML
 	private void initialize() {
 		
@@ -67,7 +115,11 @@ public class IndexController {
 		tableBackrooms.setItems(backroomsSelect);
 	}
 	
-	
+	/**
+	 * Funcion getBackroomsBD que obtiene todas las Backrooms ya introducidas en la base de datos, metiendolas
+	 * en un ObservableList.
+	 * @return Devuelve un ObservableList con todas las backrooms.
+	 */
 	private ObservableList<Backroom> getBackroomsBD() {
 		
 		ObservableList<Backroom> backroomsListBD = FXCollections.observableArrayList();
@@ -98,6 +150,10 @@ public class IndexController {
 		return backroomsListBD;
 	}
 	
+	/**
+	 * Funcion addBackroom que añade una nueva backroom tanto a la tabla, como a la base de datos.
+	 * @param event El evento que hara que se ejecute la funcion.
+	 */
 	@FXML
 	public void addBackroom(ActionEvent event) {
 		
@@ -158,6 +214,10 @@ public class IndexController {
 		}
 	}
 	
+	/**
+	 * Funcion deleteBackroom que borra una backroom de la tabla y la base de datos.
+	 * @param event
+	 */
 	@FXML
 	public void deleteBackroom(ActionEvent event) {
 		int selectIndex = tableBackrooms.getSelectionModel().getSelectedIndex();
@@ -193,6 +253,11 @@ public class IndexController {
 		}
 	}
 	
+	/**
+	 * Funcion que nos dice si una cadena de texto es numerica o no.
+	 * @param s La cadena que comprobaremos.
+	 * @return true si es numerica, false si no es numerica.
+	 */
 	public boolean isNumeric (String s) {
 		try {
 			Integer.parseInt(s);
