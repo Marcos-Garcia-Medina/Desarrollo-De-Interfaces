@@ -1,10 +1,45 @@
-.button {
-	-fx-background-color: blue;
-	-fx-font-size: 12pt;
-	-fx-text-fill: lightblue;
-	
+#panel_izq, #tablepane, #panel_der{
+	-fx-background-color: #000080;
 }
 
-#panel_izq {
-	-fx-background-color: lightblue;
+.table-view {
+    -fx-base: blue;
+    -fx-control-inner-background: #000080;
+    -fx-background-color: #000080;
+    -fx-table-cell-border-color: black;
+    -fx-table-header-border-color: black;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 10pt;
+    -fx-alignment: center;
+}
+
+#menubar {
+	-fx-background-color: #000080 ;
+}
+
+.menu-bar .label {
+    -fx-text-fill: blue;
+}
+
+.button {
+	-fx-background-color: blue;
+	-fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #000080;
+}
+
+.context-menu {
+    -fx-background-color: blue;
+}
+
+.context-menu .label {
+    -fx-text-fill: white;
 }
