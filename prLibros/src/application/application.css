@@ -1,1 +1,45 @@
-/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+#panel_izq, #tablepane, #panel_der{
+	-fx-background-color: #2D572C;
+}
+
+.table-view {
+    -fx-base: green;
+    -fx-control-inner-background: #2D572C;
+    -fx-background-color: #2D572C;
+    -fx-table-cell-border-color: black;
+    -fx-table-header-border-color: black;
+}
+
+.label {
+	-fx-text-fill: white;
+}
+
+.table-view .column-header .label {
+    -fx-font-size: 10pt;
+    -fx-alignment: center;
+}
+
+#menubar {
+	-fx-background-color: #2D572C ;
+}
+
+.menu-bar .label {
+    -fx-text-fill: green;
+}
+
+.button {
+	-fx-background-color: green;
+	-fx-text-fill: white;
+}
+
+.button:hover {
+    -fx-background-color: #362424;
+}
+
+.context-menu {
+    -fx-background-color: green;
+}
+
+.context-menu .label {
+    -fx-text-fill: white;
+}
